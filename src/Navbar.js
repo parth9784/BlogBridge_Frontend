@@ -1,29 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { Link,useNavigate } from 'react-router-dom';
 
-export default function Navbar() {
-  const navigate=useNavigate();
-
+export default function Navbar({isLoggedIn,onLogout}) {
+  const navigate = useNavigate();
   const [sidebar, setSidebar] = useState(false);
-  const [log, setLog] = useState(false);
-
+  const [log, setLog] = useState(isLoggedIn);
+  // console.log("Navbar me log status:",log)
   useEffect(() => {
-    let token = localStorage.getItem('authToken');
-    setLog(!!token);
-  }, []);
+    setLog(isLoggedIn);
+  }, [isLoggedIn]);
 
   function toggleSidebar() {
     setSidebar(!sidebar);
   }
 
   function handleLogout() {
-    localStorage.removeItem('authToken');
-    setLog(false);
-    toggleSidebar();
+    onLogout();
+    toggleSidebar(); 
   }
-  function handlehome(){
-    navigate("/")
 
+  function handlehome() {
+    navigate("/");
   }
 
   return (

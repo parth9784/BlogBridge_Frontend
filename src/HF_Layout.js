@@ -1,10 +1,10 @@
 import React from 'react'
 import Foter from './foter'
 import Navbar from './Navbar'
-export default function HF_Layout({children}){
+export default function HF_Layout({children, isLoggedIn, onLogout }){
     return(
         <div>
-        <Navbar/>
+        <Navbar isLoggedIn={isLoggedIn} onLogout={onLogout}/>
         <div className='mt-3 flex-grow'>
         {children}
         </div>

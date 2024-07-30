@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-export default function LoginPage() {
+export default function LoginPage({handleLogin}) {
   const navigate = useNavigate(); 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -23,6 +23,7 @@ export default function LoginPage() {
       if (response.status === 200) {
         console.log("Login Successful..");
         localStorage.setItem("authToken", response.data.token);
+        handleLogin()
         navigate("/");
       }
     } catch (err) {
