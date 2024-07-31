@@ -1,9 +1,12 @@
 import React from 'react'
 import Bloglist from './bloglist';
 import { IoMdAdd } from "react-icons/io";
+import { useNavigate } from 'react-router-dom';
 export default function Homepage({isloggedin}){
+    const navigate=useNavigate()
     function handleclick(){
-        console.log("New post")
+        // console.log("New post")
+        navigate("/createblog")
     }
     return(
         <div className='flex flex-col'>

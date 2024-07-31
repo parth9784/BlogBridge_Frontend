@@ -3,10 +3,12 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { toast } from 'react-toastify';
 export default function Signup() {
   const navigate = useNavigate();
-  
+  const notifysignup=()=>toast.success("Registered Successfully!!")
+  const notifysignuperr=()=>toast.error("User Already Registered!!")
+  const notifysignuperr1=()=>toast.error("Network Error!! Please try after some time!!")
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     if (token) {
@@ -24,13 +26,16 @@ export default function Signup() {
         });
 
         if (response.status === 200) {
-          console.log("Signup Successfully...");
+          // console.log("Signup Successfully...");
+          notifysignup();
           navigate("/login");
         } else {
-          console.log("Signup Not Successful");
+          // console.log("Signup Not Successful");
+          notifysignuperr();
         }
       } catch (error) {
         console.error('Signup error:', error);
+        notifysignuperr1();
       }
     }
   }

@@ -9,6 +9,7 @@ export default function Bloglist() {
     const fetchData = async () => {
       try {
         const res = await Getdata();
+        // console.log(res.data)
         setData(res.data);
       } catch (error) {
         console.error('Error fetching data:', error);

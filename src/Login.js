@@ -3,12 +3,15 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { toast } from 'react-toastify';
 export default function LoginPage({handleLogin}) {
   const navigate = useNavigate(); 
+  const notifylogin=()=>toast.success("Logged in Successfully!!")
+  const notifylogged=()=>toast.success("Welcome back!!")
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     if (token) {
+      notifylogged();
       navigate("/");
     }
   }, [navigate]);
@@ -24,6 +27,7 @@ export default function LoginPage({handleLogin}) {
         console.log("Login Successful..");
         localStorage.setItem("authToken", response.data.token);
         handleLogin()
+        notifylogin();
         navigate("/");
       }
     } catch (err) {

@@ -8,7 +8,7 @@ const BlogPage = () => {
     const [data, setData] = useState([]);
     const [blogg, setBlogg] = useState(null);
     const { id } = useParams();
-    const navigate=useNavigate()
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -23,24 +23,21 @@ const BlogPage = () => {
     }, []);
 
     useEffect(() => {
-        const token =localStorage.getItem("authToken");
-        if(token){
+        const token = localStorage.getItem("authToken");
+        if (token) {
             const fetchbyid = async () => {
                 try {
-                    const res = await Getbyid(id,token);
+                    const res = await Getbyid(id, token);
                     setBlogg(res);
                 } catch (err) {
                     console.error('Error fetching blog by ID:', err);
                 }
             }
             fetchbyid();
-
+        } else {
+            navigate("/login");
         }
-        else{
-            navigate("/login")
-        }
-       
-    }, [id]);
+    }, [id, navigate]);
 
     if (!data.length || !blogg) {
         return <Loading />;
@@ -48,12 +45,12 @@ const BlogPage = () => {
 
     return (
         <div className="flex flex-col md:flex-row min-h-screen p-4 popr">
-        <div className="flex-1 md:flex-[8] p-4 bg-white rounded-lg shadow-md">
-            <h1 className="text-3xl font-bold mb-4">{blogg.title}</h1>
-            <p className="font-md">By Parth Dadhich</p>
-            <img className="rounded-lg mb-2 mt-2 mx-auto block max-h-[400px] max-w-[400px]" src={blogg.image} alt="photo" />
-            <p className="text-lg">{blogg.content}</p>
-        </div>
+            <div className="flex-1 md:flex-[8] p-4 bg-white rounded-lg shadow-md">
+                <h1 className="text-3xl font-bold mb-4">{blogg.title}</h1>
+                <p className="font-md">By Parth Dadhich</p>
+                <img className="rounded-lg mb-4 mt-2 mx-auto block max-h-[400px] max-w-[400px]" src={blogg.image} alt="photo" />
+                <div className="text-lg" dangerouslySetInnerHTML={{ __html: blogg.content }} />
+            </div>
 
             <div className="flex-1 md:flex-[2] p-4 bg-gray-100 rounded-lg shadow-md mt-4 md:mt-0 md:ml-4">
                 <h2 className="text-xl font-bold mb-4">You May Also Like</h2>
