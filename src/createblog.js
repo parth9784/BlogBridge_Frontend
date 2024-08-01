@@ -50,7 +50,7 @@ export default function CreateBlog() {
                 <button 
                     type="button" 
                     onClick={handlepublish} 
-                    className="flex items-center gap-1 text-md absolute right-0 mt-3 text-[#539F8D] max-w-[130px] text-center hover:text-black border border-[#539F8D] hover:bg-[#D3E8E2] font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                    className="flex items-center gap-1 text-md absolute right-0 mr-3 mt-3 text-[#539F8D] max-w-[130px] text-center hover:text-black border border-[#539F8D] hover:bg-[#D3E8E2] font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
                 >
                     <FaPaperPlane />Publish
                 </button>

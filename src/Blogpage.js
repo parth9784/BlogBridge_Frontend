@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import Getdata from './Getdata';
 import Loading from './Loading';
 import Getbyid from './Getbyid';
-
+import { toast } from 'react-toastify';
 const BlogPage = () => {
     const [data, setData] = useState([]);
     const [blogg, setBlogg] = useState(null);
@@ -14,6 +14,10 @@ const BlogPage = () => {
         const fetchData = async () => {
             try {
                 const res = await Getdata();
+                if(res.status===401){
+                    console.log("401")
+                    toast.error("Session Expired Please Login Again!!")
+                }
                 setData(res.data);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -47,7 +51,7 @@ const BlogPage = () => {
         <div className="flex flex-col md:flex-row min-h-screen p-4 popr">
             <div className="flex-1 md:flex-[8] p-4 bg-white rounded-lg shadow-md">
                 <h1 className="text-3xl font-bold mb-4">{blogg.title}</h1>
-                <p className="font-md">By Parth Dadhich</p>
+                <p className="font-md">By {blogg.person}</p>
                 <img className="rounded-lg mb-4 mt-2 mx-auto block max-h-[400px] max-w-[400px]" src={blogg.image} alt="photo" />
                 <div className="text-lg" dangerouslySetInnerHTML={{ __html: blogg.content }} />
             </div>

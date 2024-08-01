@@ -12,7 +12,7 @@ export default function Loading() {
                     loop 
                     autoplay
                 ></dotlottie-player>
-                <p className='popmed text-2xl'>Bridging the gap to awesome content...</p>
+                <p className='popmed text-2xl text-center'>Bridging the gap to awesome content...</p> {/* Added text-center */}
             </div>
         </div>
     );
