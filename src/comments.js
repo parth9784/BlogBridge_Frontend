@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { FaUserCircle } from 'react-icons/fa';
-
+import { MdDelete } from "react-icons/md";
 const CommentSection = ({ id }) => {
+    const baseurl="http://localhost:3001/";
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
     const token = localStorage.getItem('authToken');
@@ -11,7 +12,7 @@ const CommentSection = ({ id }) => {
     useEffect(() => {
         const fetchComments = async () => {
             try {
-                const res = await axios.get("http://localhost:3001/fetchcomments", { params: { blog_id: id } });
+                const res = await axios.get(`${baseurl}fetchcomments`, { params: { blog_id: id } });
                 setComments(res.data.data || []); 
             } catch (error) {
                 console.error('Error fetching comments:', error);
@@ -29,11 +30,11 @@ const CommentSection = ({ id }) => {
         }
 
         try {
-            const res = await axios.post('http://localhost:3001/docomment', 
+            const res = await axios.post(`${baseurl}docomment`, 
                 { blog_id: id, content: newComment },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
-            setComments(prevComments => [...prevComments, res.data.comment]); // Adjust based on actual response
+            setComments(prevComments => [...prevComments, res.data.comment]);
             setNewComment('');
             toast.success('Comment posted successfully!');
         } catch (error) {
@@ -41,23 +42,58 @@ const CommentSection = ({ id }) => {
             toast.error('Error posting comment.');
         }
     };
+    async function getuserid(token) {
+        try {
+            const response = await axios.get(`${baseurl}getuserinfo`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            // console.log(response.data.user_id);
+            localStorage.setItem("userid",response.data.user_id)
+        } catch (error) {
+            console.error('Error fetching user info:', error);
+        }
+    }
+    getuserid(token)
+    async function handledelete(id){
+        const del=await axios.delete(`${baseurl}deletecomment`, {data: {
+            comment_id: id
+    }})
+    if(del.status===200){
+        setComments(prevComments => prevComments.filter(comment => comment._id !== id));
+        toast.success("Comment Deleted Successfully!!");
+    }else{
+        toast.error("Network error please Try after some time!!")
+    }
+    } 
 
     return (
         <div className="mt-8">
             <h2 className="text-xl font-bold mb-4">Comments</h2>
             <div className="space-y-4">
                 {comments.length > 0 ? (
-                    comments.map((comment, index) => (
+                    comments.map((comment, index) =>((comment.user===localStorage.getItem("userid")))?(
                         <div key={index} className="bg-white p-3 rounded-lg shadow-md flex flex-col">
                             <div className="flex items-center gap-2 mb-2">
                                 <FaUserCircle className="text-lg" />
                                 <p className="text-md text-gray-500">{comment.username || 'Anonymous'}</p>
                             </div>
+                            <div className='flex items-center relative'>
+                                <p>{comment.content}</p>
+                                <MdDelete  className='text-lg absolute right-[0]' onClick={()=>handledelete(comment._id)} />
+                            </div>
+                            
+                        </div>
+                    ):(<div key={index} className="bg-white p-3 rounded-lg shadow-md flex flex-col">
+                            <div className="flex items-center gap-2 mb-2">
+                                <FaUserCircle className="text-lg"/>
+                                <p className="text-md text-gray-500">{comment.username || 'Anonymous'}</p>
+                            </div>
                             <div>
                                 <p>{comment.content}</p>
                             </div>
-                        </div>
-                    ))
+                        </div>))
                 ) : (
                     <p>No comments yet.</p>
                 )}
