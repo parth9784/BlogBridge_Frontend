@@ -32,6 +32,7 @@ export default function LoginPage({handleLogin}) {
       }
     } catch (err) {
       console.error(err);
+      toast.error("Invalid Credidentials")
     }
   }
 
@@ -119,7 +120,7 @@ export default function LoginPage({handleLogin}) {
               <div className="text-sm text-red-700">{errors.password}</div>
             )}
           </div>
-          <Link to="/forgot" className="text-blue-600 text-sm self-end mt-2">
+          <Link to="/forgot" className="text-blue-600 text-sm self-end mt-2 ">
             Forgot Password
           </Link>
         </div>

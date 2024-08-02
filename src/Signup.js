@@ -7,8 +7,8 @@ import { toast } from 'react-toastify';
 export default function Signup() {
   const navigate = useNavigate();
   const notifysignup=()=>toast.success("Registered Successfully!!")
-  const notifysignuperr=()=>toast.error("User Already Registered!!")
-  const notifysignuperr1=()=>toast.error("Network Error!! Please try after some time!!")
+  const notifysignuperr=()=>toast.info("User Already Registered!!")
+  // const notifysignuperr1=()=>toast.error("Network Error!! Please try after some time!!")
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     if (token) {
@@ -29,13 +29,14 @@ export default function Signup() {
           // console.log("Signup Successfully...");
           notifysignup();
           navigate("/login");
-        } else {
-          // console.log("Signup Not Successful");
-          notifysignuperr();
-        }
+        } 
+        // else {
+        //   // console.log("Signup Not Successful");
+        //   // notifysignuperr();
+        // }
       } catch (error) {
         console.error('Signup error:', error);
-        notifysignuperr1();
+        notifysignuperr();
       }
     }
   }

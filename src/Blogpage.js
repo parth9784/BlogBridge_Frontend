@@ -4,9 +4,12 @@ import Getdata from './Getdata';
 import Loading from './Loading';
 import Getbyid from './Getbyid';
 import { toast } from 'react-toastify';
+import CommentSection from './comments';
+
 const BlogPage = () => {
     const [data, setData] = useState([]);
     const [blogg, setBlogg] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -14,11 +17,11 @@ const BlogPage = () => {
         const fetchData = async () => {
             try {
                 const res = await Getdata();
-                if(res.status===401){
-                    console.log("401")
-                    toast.error("Session Expired Please Login Again!!")
+                if (res.status === 401) {
+                    toast.error("Session Expired Please Login Again!!");
+                } else {
+                    setData(res.data);
                 }
-                setData(res.data);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -33,17 +36,18 @@ const BlogPage = () => {
                 try {
                     const res = await Getbyid(id, token);
                     setBlogg(res);
+                    setIsLoading(false);
                 } catch (err) {
                     console.error('Error fetching blog by ID:', err);
                 }
-            }
+            };
             fetchbyid();
         } else {
             navigate("/login");
         }
     }, [id, navigate]);
 
-    if (!data.length || !blogg) {
+    if (isLoading) {
         return <Loading />;
     }
 
@@ -54,6 +58,9 @@ const BlogPage = () => {
                 <p className="font-md">By {blogg.person}</p>
                 <img className="rounded-lg mb-4 mt-2 mx-auto block max-h-[400px] max-w-[400px]" src={blogg.image} alt="photo" />
                 <div className="text-lg" dangerouslySetInnerHTML={{ __html: blogg.content }} />
+                <div>
+                    <CommentSection id={id} />
+                </div>
             </div>
 
             <div className="flex-1 md:flex-[2] p-4 bg-gray-100 rounded-lg shadow-md mt-4 md:mt-0 md:ml-4">

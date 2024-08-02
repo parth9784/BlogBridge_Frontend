@@ -13,6 +13,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import Myblogpage from './myblogpage';
 import Nodatafound from './Nodatafound';
 import EditBlog from './Editblog';
+import About from './About';
+import ContactPage from './Contact';
+import Forgotpassword from './Forgotpassword';
+import Otppage from './otppage';
+import ChangePassword from './Changepassword';
+import CommentSection from './comments';
+
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('authToken'));
   // console.log("app.js me status:",isLoggedIn)
@@ -25,6 +33,7 @@ function App() {
   };
 
   return (
+
     <div className=''>
      <Routes>
       <Route path="/" element={<HF_Layout isLoggedIn={isLoggedIn} onLogout={handleLogout}> <Homepage isloggedin={isLoggedIn}/></HF_Layout >}></Route>
@@ -37,6 +46,12 @@ function App() {
       <Route path="/createblog" element={<HF_Layout isLoggedIn={isLoggedIn} onLogout={handleLogout}> <CreateBlog/></HF_Layout>}></Route>
       <Route path="/myblog/:id" element={<HF_Layout isLoggedIn={isLoggedIn} onLogout={handleLogout}><Myblogpage/></HF_Layout>}></Route>
       <Route path="/editblog/:id" element={<HF_Layout isLoggedIn={isLoggedIn} onLogout={handleLogout}><EditBlog/></HF_Layout>}></Route>
+      <Route path="/about" element={<About/>}></Route>
+      <Route path="/contact" element={<ContactPage/>}></Route>
+      <Route path="/forgot" element={<Forgotpassword/>}></Route>
+      <Route path="/otppage" element={<Otppage/>}></Route>
+      <Route path="/changepassword" element={<ChangePassword/>}></Route>
+      <Route path="/comments" element={<CommentSection/>}></Route>
       </Routes>
       <ToastContainer
           position="top-right"

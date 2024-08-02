@@ -51,8 +51,8 @@ export default function Navbar({isLoggedIn,onLogout}) {
 
         <ul className='hidden md:flex gap-4 mx-4 text-blue-900'>
           <Link to="/"><li className='hover:text-blue-700'>Home</li></Link>
-          <Link to="#"><li className='hover:text-blue-700'>About</li></Link>
-          <Link to="#"><li className='hover:text-blue-700'>Contact</li></Link>
+          <Link to="/about"><li className='hover:text-blue-700'>About</li></Link>
+          <Link to="/contact"><li className='hover:text-blue-700'>Contact</li></Link>
           {log && <Link to="/myblogs"><li className=' hover:text-blue-700'>My Blogs</li></Link>}
           {log ? <Link to="#"><li className=' hover:text-blue-700' onClick={handleLogout}>Logout</li></Link> : <Link to="/login"><li className='hover:text-blue-700'>Login</li></Link>}
         </ul>
@@ -79,8 +79,8 @@ export default function Navbar({isLoggedIn,onLogout}) {
               </a>
             </li>
             <Link to="/"><li className='hover:text-blue-700'>Home</li></Link>
-            <Link to="#"><li className='hover:text-blue-700' >About</li></Link>
-            <Link to="#"><li className='hover:text-blue-700'>Contact</li></Link>
+            <Link to="/about"><li className='hover:text-blue-700' >About</li></Link>
+            <Link to="/contact"><li className='hover:text-blue-700'>Contact</li></Link>
             {log && <Link to="/myblogs"><li className='hover:text-blue-700'>My Blogs</li></Link>}
             {log ? (
               <Link to="/"><li className='hover:text-blue-700' onClick={handleLogout}>Logout</li></Link>
