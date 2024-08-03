@@ -29,7 +29,7 @@ export default function CreateBlog() {
         }
 
         try {
-            const data = await axios.post("http://localhost:3001/createblog", obj);
+            const data = await axios.post("https://blogbridge-backend.onrender.com/createblog", obj);//http://localhost:3001/createblog
             if (data.status === 200) {
                 console.log("Created the post...");
                 notifysuccess();

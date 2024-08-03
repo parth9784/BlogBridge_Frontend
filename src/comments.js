@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { FaUserCircle } from 'react-icons/fa';
 import { MdDelete } from "react-icons/md";
 const CommentSection = ({ id }) => {
-    const baseurl="http://localhost:3001/";
+    const baseurl="https://blogbridge-backend.onrender.com/";//http://localhost:3001/
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
     const token = localStorage.getItem('authToken');

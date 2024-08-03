@@ -18,7 +18,7 @@ export default function LoginPage({handleLogin}) {
 
   async function onlogin(values) {
     try {
-      const response = await axios.post("http://localhost:3001/login", {
+      const response = await axios.post("https://blogbridge-backend.onrender.com/login", {//http://localhost:3001/login
         email: values.email,
         password: values.password,
       });

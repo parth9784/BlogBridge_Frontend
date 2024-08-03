@@ -5,7 +5,7 @@ import { IoMdAdd } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
 
 export default function Homepage({ isloggedin,query }) {
-    const baseurl = process.env.base_url;
+    const baseurl ="https://blogbridge-backend.onrender.com/";
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
 

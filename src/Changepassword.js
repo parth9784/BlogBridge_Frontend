@@ -10,7 +10,7 @@ export default function ChangePassword() {
 
     async function onChangePassword(values) {
         try {
-            const res = await axios.put("http://localhost:3001/passwordreset", {
+            const res = await axios.put("https://blogbridge-backend.onrender.com/passwordreset", {//http://localhost:3001/passwordreset
                 email: localStorage.getItem("email"),
                 password: values.password
             });

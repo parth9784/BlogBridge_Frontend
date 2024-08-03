@@ -37,7 +37,7 @@ export default function CreateBlog() {
         try {
             const token = localStorage.getItem("authToken");
             const updatedBlog = { title, image, content,token,id };
-            await axios.put(`http://localhost:3001/editblog`, updatedBlog);
+            await axios.put(`https://blogbridge-backend.onrender.com/editblog`, updatedBlog);//http://localhost:3001/editblog
             toast.success('Blog updated successfully.');
             navigate('/myblogs');
         } catch (err) {

@@ -10,7 +10,7 @@ export default function Forgotpassword() {
     async function onlogin(values) {
         const email = values.email;
         try {
-            const res = await axios.post("http://localhost:3001/forgotpassword", {
+            const res = await axios.post("https://blogbridge-backend.onrender.com/forgotpassword", {//http://localhost:3001/forgotpassword
                 email: email
             });
 

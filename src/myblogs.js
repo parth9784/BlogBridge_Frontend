@@ -18,7 +18,7 @@ export default function Myblogs() {
         const fetchUserBlogs = async () => {
             try {
                 const token = localStorage.getItem("authToken");
-                const res = await axios.post("http://localhost:3001/getuserblog", { token: token });
+                const res = await axios.post("https://blogbridge-backend.onrender.com/getuserblog", { token: token });//http://localhost:3001/getuserblog
                 setData(res.data);
                 setLoading(false);
                 if(res.data.length === 0) {

@@ -19,7 +19,7 @@ export default function Signup() {
   async function onsignup(values) {
     if (values.password === values.repass) {
       try {
-        const response = await axios.post("http://localhost:3001/signup", {
+        const response = await axios.post("https://blogbridge-backend.onrender.com/signup", {//http://localhost:3001/signup
           email: values.email,
           password: values.password,
           username: values.user

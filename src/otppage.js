@@ -10,7 +10,7 @@ export default function Otppage() {
 
     async function onlogin(values) {
         try {
-            const res = await axios.post("http://localhost:3001/verifyotp", {
+            const res = await axios.post("https://blogbridge-backend.onrender.com/verifyotp", {//http://localhost:3001/verifyotp
                 email: localStorage.getItem("email"),
                 otp: values.otp
             });
