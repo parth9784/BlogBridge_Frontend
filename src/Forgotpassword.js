@@ -24,7 +24,7 @@ export default function Forgotpassword() {
             }
         } catch (err) {
             console.error(err);
-            toast.error("Enter the Registered")
+            toast.error("Enter the Registered Email id!!")
         }
     }
 
