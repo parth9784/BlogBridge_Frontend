@@ -56,7 +56,7 @@ const BlogPage = () => {
             <div className="flex-1 md:flex-[8] p-4 bg-white rounded-lg shadow-md">
                 <h1 className="text-3xl font-bold mb-4">{blogg.title}</h1>
                 <p className="font-md">By {blogg.person}</p>
-                <img className="rounded-lg mb-4 mt-2 mx-auto block md:max-h-[400px] md:max-w-[400px] max-h-[300px] max-w-[300px]" src={blogg.image} alt="photo" />
+                <img className="rounded-lg mb-4 mt-2 mx-auto block md:max-h-[400px] md:max-w-[400px] max-h-[250px] max-w-[250px]" src={blogg.image} alt="photo" />
                 <div className="text-lg" dangerouslySetInnerHTML={{ __html: blogg.content }} />
                 <div>
                     <CommentSection id={id} />
