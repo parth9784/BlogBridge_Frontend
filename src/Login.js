@@ -22,7 +22,6 @@ export default function LoginPage({handleLogin}) {
         email: values.email,
         password: values.password,
       });
-
       if (response.status === 200) {
         console.log("Login Successful..");
         localStorage.setItem("authToken", response.data.token);
@@ -41,7 +40,7 @@ export default function LoginPage({handleLogin}) {
       .email("Email must be in example@domain format")
       .required("Email is required"),
     password: Yup.string()
-      .min(4, "Password must be at least 4 characters long")
+      .min(6, "Password must be at least 6 characters long")
       .required("Password is required"),
   });
 
