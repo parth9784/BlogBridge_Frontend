@@ -42,20 +42,20 @@ const CommentSection = ({ id }) => {
             toast.error('Error posting comment.');
         }
     };
-    async function getuserid(token) {
-        try {
-            const response = await axios.get(`${baseurl}getuserinfo`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            // console.log(response.data.user_id);
-            localStorage.setItem("userid",response.data.user_id)
-        } catch (error) {
-            console.error('Error fetching user info:', error);
-        }
-    }
-    getuserid(token)
+    // async function getuserid(token) {
+    //     try {
+    //         const response = await axios.get(`${baseurl}getuserinfo`, {
+    //             headers: {
+    //                 Authorization: `Bearer ${token}`
+    //             }
+    //         });
+    //         // console.log(response.data.user_id);
+    //         localStorage.setItem("userid",response.data.user_id)
+    //     } catch (error) {
+    //         console.error('Error fetching user info:', error);
+    //     }
+    // }
+    // getuserid(token)
     async function handledelete(id){
         const del=await axios.delete(`${baseurl}deletecomment`, {data: {
             comment_id: id
@@ -67,7 +67,6 @@ const CommentSection = ({ id }) => {
         toast.error("Network error please Try after some time!!")
     }
     } 
-
     return (
         <div className="mt-8">
             <h2 className="text-xl font-bold mb-4">Comments</h2>
@@ -81,7 +80,7 @@ const CommentSection = ({ id }) => {
                             </div>
                             <div className='flex items-center relative'>
                                 <p>{comment.content}</p>
-                                <MdDelete  className='text-lg absolute right-[0]' onClick={()=>handledelete(comment._id)} />
+                                <MdDelete  className='text-xl absolute right-[0] cursor-pointer' onClick={()=>handledelete(comment._id)} />
                             </div>
                             
                         </div>

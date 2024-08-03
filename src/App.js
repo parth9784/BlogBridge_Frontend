@@ -20,8 +20,8 @@ import Otppage from './otppage';
 import ChangePassword from './Changepassword';
 import CommentSection from './comments';
 
-
 function App() {
+  const [query,setquery]=useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('authToken'));
   // console.log("app.js me status:",isLoggedIn)
   const handleLogin=()=>{
@@ -29,14 +29,16 @@ function App() {
   }
   const handleLogout = () => {
     localStorage.removeItem('authToken');
+    localStorage.removeItem("userid")
+    localStorage.removeItem("username")
     setIsLoggedIn(false);
   };
-
+  // console.log(query);
   return (
 
     <div className=''>
      <Routes>
-      <Route path="/" element={<HF_Layout isLoggedIn={isLoggedIn} onLogout={handleLogout}> <Homepage isloggedin={isLoggedIn}/></HF_Layout >}></Route>
+      <Route path="/" element={<HF_Layout isLoggedIn={isLoggedIn} onLogout={handleLogout} query={query} setquery={setquery}> <Homepage isloggedin={isLoggedIn} query={query}/></HF_Layout >}></Route>
       <Route path="/login" element={<LoginPage handleLogin={handleLogin}/>}></Route>
       <Route path="/signup" element={<Signup/>}></Route>
       <Route path="/myblogs" element={<HF_Layout isLoggedIn={isLoggedIn} onLogout={handleLogout}><Myblogs/></HF_Layout>}></Route>

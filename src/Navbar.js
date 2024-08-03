@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link,useLocation,useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-export default function Navbar({isLoggedIn,onLogout}) {
+export default function Navbar({isLoggedIn,onLogout,setquery}) {
   const navigate = useNavigate();
   const uselocation=useLocation();
   const [sidebar, setSidebar] = useState(false);
@@ -24,6 +24,11 @@ export default function Navbar({isLoggedIn,onLogout}) {
   function handlehome() {
     navigate("/");
   }
+  function handlechange(event){
+    let value=event.target.value;
+    setquery(value)
+
+  }
 
   return (
     <div className='mt-1 z-[999] w-full flex h-[100px] bg-[#D3E8E2] justify-between items-center popmed'>
@@ -39,14 +44,8 @@ export default function Navbar({isLoggedIn,onLogout}) {
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2"/>
               </svg>
             </div>
-            <input type="text" id="simple-search" className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full ps-10 p-2.5" placeholder="Search" required />
+            <input type="text" id="simple-search" className="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full ps-10 p-2.5" placeholder="Search" required onChange={handlechange} />
           </div>
-          <button type="submit" className="p-2.5 ms-2 text-sm font-medium text-white bg-blue-600 rounded-lg border border-blue-700 hover:bg-blue-800">
-            <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-            </svg>
-            <span className="sr-only">Search</span>
-          </button>
         </form>}
 
         <ul className='hidden md:flex gap-4 mx-4 text-blue-900'>

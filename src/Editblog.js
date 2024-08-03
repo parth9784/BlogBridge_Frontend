@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState} from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { MdUpdate } from "react-icons/md";
@@ -13,14 +13,13 @@ export default function CreateBlog() {
     const [title, setTitle] = useState('');
     const [image, setImage] = useState('');
     const [content, setContent] = useState('');
-    const quillRef = useRef(null);
 
     useEffect(() => {
         const fetchBlog = async () => {
             try {
                 const token = localStorage.getItem("authToken");
                 const res = await Getbyid(id, token);
-                console.log(res)
+                // console.log(res)
                 setTitle(res.title);
                 setImage(res.image);
                 setContent(res.content);

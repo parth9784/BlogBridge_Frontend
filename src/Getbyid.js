@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export default async function Getbyid(id,token) {
+    const baseurl = process.env.base_url;
     try {
         const response = await axios.post("http://localhost:3001/getbyid", {
             blogid: id,
