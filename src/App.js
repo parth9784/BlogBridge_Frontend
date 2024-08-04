@@ -19,6 +19,7 @@ import Forgotpassword from './Forgotpassword';
 import Otppage from './otppage';
 import ChangePassword from './Changepassword';
 import CommentSection from './comments';
+import Pnf from './Pnf';
 
 function App() {
   const [query,setquery]=useState("");
@@ -54,6 +55,8 @@ function App() {
       <Route path="/otppage" element={<Otppage/>}></Route>
       <Route path="/changepassword" element={<ChangePassword/>}></Route>
       <Route path="/comments" element={<CommentSection/>}></Route>
+      <Route path="/comments" element={<CommentSection/>}></Route>
+      <Route path="*" element={<Pnf/>} ></Route>
       </Routes>
       <ToastContainer
           position="top-right"
