@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from 'react-toastify';
+import { IoMdArrowRoundBack } from "react-icons/io";
 export default function LoginPage({handleLogin}) {
   const navigate = useNavigate(); 
   const notifylogin=()=>toast.success("Logged in Successfully!!")
@@ -15,7 +16,9 @@ export default function LoginPage({handleLogin}) {
       navigate("/");
     }
   }, [navigate]);
-
+  function handleclick(){
+    navigate("/")
+  }
   async function onlogin(values) {
     try {
       const response = await axios.post("https://blogbridge-backend.onrender.com/login", {//http://localhost:3001/login
@@ -61,7 +64,8 @@ export default function LoginPage({handleLogin}) {
   });
 
   return (
-    <div className="bg-white w-screen h-screen flex flex-col md:flex-row items-center justify-around p-4 md:p-0">
+    <div className="bg-white w-screen h-screen flex flex-col md:flex-row items-center justify-around p-4 md:p-0 relative">
+    <IoMdArrowRoundBack className="text-2xl absolute left-[0] top-[0] m-6" onClick={handleclick}/>
       <form
         onSubmit={handleSubmit}
         className="w-full md:w-[400px] bg-gray-100 flex flex-col items-center gap-6 rounded-lg p-6 md:p-9 shadow-md"
